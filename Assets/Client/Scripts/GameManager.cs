@@ -23,8 +23,21 @@ public class GameManager : MonoBehaviour
     {
         if (Bus.PlayerHealth <= 0)
         {
-            Time.timeScale = 0;
-            Bus.OnGameOver.Invoke();
+            GameOver();
+            
         }
+    }
+
+    private void GameOver()
+    {
+        Time.timeScale = 0;
+        Bus.OnGameOver.Invoke();
+        
+        Bus.OnEnemyAttacked.RemoveAllListeners();
+        Bus.OnEnemyDead.RemoveAllListeners();
+        Bus.OnGameOver.RemoveAllListeners();
+        Bus.OnGameStart.RemoveAllListeners();
+        Bus.OnGoldChanged.RemoveAllListeners();
+        Bus.OnEnemyStepTarget.RemoveAllListeners();
     }
 }
